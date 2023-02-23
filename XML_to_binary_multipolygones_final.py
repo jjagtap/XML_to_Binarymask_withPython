@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# author: m235103
+# author: Jaidip Jagtap
 
-file1 = open("cortex.txt", "a")
+file1 = open("cortex.txt", "a") # It writes the log of updates
 # In[1]:
 
 
@@ -127,16 +127,16 @@ import gc
 
 # In[16]:
 
-xml_path= '/research/projects/Jaidip/Work_Data/Dr_Rule_project_KidneyPathology/Nephrectomy_donor_data/Nephrectomy_split/Train_Val_Test_Data/Data20x/Test_xml_updated/'
-file_path = r"/research/projects/Jaidip/Work_Data/Dr_Rule_project_KidneyPathology/Nephrectomy_donor_data/Nephrectomy_split/Train_Val_Test_Data/Data20x/Test/"
-mask_output =r"/research/projects/Jaidip/Work_Data/Dr_Rule_project_KidneyPathology/Nephrectomy_donor_data/Nephrectomy_split/Train_Val_Test_Data/Data20x/Analysis/Output/GroundTruth/Medulla_NSGarea1d_maskfinal"
+xml_path= '.../Test_xml_path/'
+file_path = r".../Test_svsfiles/"
+mask_output =r".../Mak_out"
 
 if not os.path.exists(mask_output):
     os.makedirs(mask_output)
 
 
 subdir, dirs, files = os.walk(file_path).__next__()
-files = [k for k in files if "400898.svs" in k]
+files = [k for k in files if ".svs" in k]
 
 for filename in tqdm(files):
     if 'png' not in filename:
@@ -154,7 +154,7 @@ for filename in tqdm(files):
         w = wsi(fname,xml_fname)       
         
         # Get mask
-        dict_mask =get_points_base(w,"yellow",custom_colors=[])
+        dict_mask =get_points_base(w,"yellow",custom_colors=[]) # selected yellow color to extract mask of it 
         
         # Check if more than 1 polygon, if there is combine all into 1 polygon         
         try:

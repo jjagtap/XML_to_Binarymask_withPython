@@ -97,7 +97,11 @@ def get_points_base(wsi_object,colors_to_use,custom_colors=[]):
 #     if Path(wsi_object['annotation_fname']).suffix == '.json':
 #         points, map_idx = get_points_json(wsi_object,colors_to_use)
         
-    point_polys = [Polygon(point) for point in points]
+    point_polys = []
+    for point in points:
+        if len(point) < 3:
+            continue
+        point_polys.append(Polygon(point))
     wsi_object["stored_points"][color_key] = []
     wsi_object["stored_points"][color_key] = {'points':points.copy(),'map_idx':map_idx.copy(), 'polygons': point_polys.copy(), 'STRtree': STRtree(point_polys)}
     
